@@ -9,8 +9,10 @@ import { ProtectedRoute } from './ProtectedRoute';
 function App() {
   return (
     <Routes>
-      <Route exact path='/' element={<DefaultLayout />}>
-
+      <Route element={<DefaultLayout />}>
+          <Route element={<ProtectedRoute />}>
+              <Route exact path='/' element={<Profile />} />
+          </Route>
       </Route>
       <Route element={<DefaultLayout />}>
         <Route element={<ProtectedRoute />}>
