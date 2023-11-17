@@ -3,11 +3,18 @@ import './App.css';
 import DefaultLayout from './layout/DefaultLayout';
 import { Routes, Route } from 'react-router-dom';
 import SignUp from './pages/Signup';
+import Profile from './pages/Profile';
 
 function App() {
   return (
     <Routes>
-      <Route exact path='/' element={<SignUp />} />
+      <Route exact path='/' element={<DefaultLayout />}>
+          
+      </Route>
+      <Route exact path='/profile' element={<DefaultLayout />}>
+          <Route index element={<Profile />} />
+      </Route>
+     
     </Routes>
   );
 }
