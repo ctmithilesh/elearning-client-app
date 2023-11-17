@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import LogoDark from '../images/logo/logo-dark.svg';
 import Logo from '../images/logo/logo.svg';
 import { useForm } from 'react-hook-form';
@@ -8,6 +8,7 @@ import { registerUser } from '../lib/registerUser';
 const SignUp = () => {
 
   const [formData, setFormData] = useState({})
+  const navigate = useNavigate()
 
   const {
     register,
@@ -30,6 +31,9 @@ const SignUp = () => {
     try {
       const result = await registerUser(first_name, last_name, email, password, role)
       console.log(result)
+      if(result.success){
+          navigate('/login')
+      }
     }
     catch (e) {
       console.log(e)

@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import DefaultLayout from './layout/DefaultLayout';
 import { Routes, Route } from 'react-router-dom';
@@ -12,7 +11,7 @@ function App() {
       <Route exact path='/' element={<DefaultLayout />}>
 
       </Route>
-      <Route exact path='/profile' element={<DefaultLayout />}>
+      <Route exact path='/dashboard' element={<DefaultLayout />}>
         <Route index element={<Profile />} />
       </Route>
       <Route exact path='/login' element={<SignIn />} />
