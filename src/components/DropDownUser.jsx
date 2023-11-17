@@ -1,10 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import UserOne from '../images/user/user-01.png';
+import Cookies from 'universal-cookie';
 
 const DropDownUser = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const cookies = new Cookies()
+  const navigate = useNavigate()
 
   const trigger = useRef(null);
   const dropdown = useRef(null);
@@ -34,6 +37,13 @@ const DropDownUser = () => {
     document.addEventListener('keydown', keyHandler);
     return () => document.removeEventListener('keydown', keyHandler);
   });
+
+  const logoutUser = async () => {
+
+      await cookies.remove('user')
+      navigate('/login')
+
+  }
 
   return (
     <div className="relative">
@@ -155,7 +165,7 @@ const DropDownUser = () => {
             </Link>
           </li>
         </ul>
-        <button className="flex items-center gap-3.5 py-4 px-6 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base">
+        <button onClick={logoutUser} className="flex items-center gap-3.5 py-4 px-6 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base">
           <svg
             className="fill-current"
             width="22"
