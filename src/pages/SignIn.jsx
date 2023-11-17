@@ -4,11 +4,13 @@ import Logo from '../images/logo/logo.svg';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { loginUser } from '../lib/loginUser';
+import Cookies from 'universal-cookie';
 
-const SignIn = () => {
+const Signin = () => {
 
   const [formData, setFormData] = useState({})
   const navigate = useNavigate()
+  const cookies = new Cookies()
 
   const {
     register,
@@ -29,6 +31,8 @@ const SignIn = () => {
       const result = await loginUser(username, password)
       console.log(result)
       if(result.success){
+          cookies.set('user', result)
+          console.log('Login successfully')
           navigate('/dashboard')
       }
     }
@@ -285,4 +289,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default Signin;

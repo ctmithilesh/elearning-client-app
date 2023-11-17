@@ -1,8 +1,15 @@
+import Cookies from 'universal-cookie';
 import BreadCrumb from '../components/BreadCrumb';
 import CoverOne from '../images/cover/cover-01.png';
 import userSix from '../images/user/user-06.png';
 
 const Profile = () => {
+
+  const cookies = new Cookies()
+  const user = cookies.get('user')
+  console.log(user)
+
+  
   return (
     <>
       <BreadCrumb pageName="Profile" />
