@@ -204,7 +204,7 @@ const Signin = () => {
                       {...register('username',{ required: true })}
                       onChangeCapture={(e)=> setFormData({...formData, username: e.target.value })}
                     />
-                    {errors.username && <small className="text-red">username is required!</small>}
+                    {errors.username && <small className="text-danger">username is required!</small>}
                     <span className="absolute right-4 top-4">
                       <svg
                         className="fill-current"
@@ -238,7 +238,7 @@ const Signin = () => {
                       {...register('password',{required: true})}
                       onChangeCapture={(e)=> setFormData({...formData, password: e.target.value })}
                     />
-                     {errors.password && <small class="text-red-400">password is required!</small>}
+                     {errors.password && <small class="text-danger">password is required!</small>}
                     <span className="absolute right-4 top-4">
                       <svg
                         className="fill-current"

@@ -312,7 +312,7 @@ const SignUp = () => {
                     {...register('password', { required: true })}
                     onChangeCapture={(e) => setFormData({ ...formData, password: e.target.value })}
                   />
-                  {errors.password && <small className="text-red-400">This field is required</small>}
+                  {errors.password && <small className="text-danger">This field is required</small>}
                   <span className="absolute right-4 top-4">
                     <svg
                       className="fill-current"
@@ -352,7 +352,7 @@ const SignUp = () => {
                     <option value="STUDENT">STUDENT </option>
                     <option value="INSTRUCTOR">INSTRUCTOR </option>
                   </select>
-                  {errors.role && <small className="text-red-400">This field is required</small>}
+                  {errors.role && <small className="text-danger">This field is required</small>}
                 </div>
               </div>
 
