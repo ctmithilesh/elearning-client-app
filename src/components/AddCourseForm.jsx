@@ -6,6 +6,9 @@ import Cookies from 'universal-cookie';
 
 const AddCourseForm = () => {
 
+  const [courses, setCourses] = useState(null)
+  const [technologies, setTechnologies] = useState(null)
+
   const [formData, setData] = useState({})
   const {
     register,
@@ -15,19 +18,27 @@ const AddCourseForm = () => {
   } = useForm()
 
   const cookies = new Cookies()
+  let user = cookies.get('user')
+  console.log('user', user)
+  const { jwtToken, email } = user 
+  console.log(jwtToken)
 
   useEffect(()=>{
-          fetchTechnologiesData()
+        
+      if(!technologies){
+        fetchTechnologiesData()
+      }
+          
 
-  },[])
+
+  })
 
   const fetchTechnologiesData = async () => {
 
-    let user = cookies.get('user')
-    const { jwtToken } = user 
-    console.log(jwtToken)
     
-    await getTechnologies(jwtToken)
+    const result = await getTechnologies(jwtToken)
+    const { data } = result 
+    setTechnologies(data)
 
   }
 
@@ -149,21 +160,28 @@ const AddCourseForm = () => {
                   <label className="mb-2.5 block text-black dark:text-white">
                     Faculty
                   </label>
-                  <textarea
+                  <select
                     rows={6}
                     placeholder="Type your message"
                     className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-                  ></textarea>
+                  > 
+                  <option value={email} disabled class="text-graydark">{email}</option>
+
+                  </select >
                 </div>
                 <div className="mb-6">
                   <label className="mb-2.5 block text-black dark:text-white">
                     Technology
                   </label>
-                  <textarea
+                  <select
                     rows={6}
                     placeholder="Type your message"
                     className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-                  ></textarea>
+                  >
+                  {technologies != null && technologies.length ? technologies.map((item, index )=>(
+                       <option value={item.technologyTitle}>{item.technologyTitle} </option>
+                  )): <span> loading.... </span>}
+                 </select>
                 </div>
 
                 <button type="submit" className="flex w-full justify-center rounded bg-primary p-3 font-medium text-gray">

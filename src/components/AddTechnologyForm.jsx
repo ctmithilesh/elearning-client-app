@@ -3,10 +3,12 @@ import Breadcrumb from './BreadCrumb'
 import { useState } from 'react';
 import { addNewTechnology } from '../lib/addNewTechnology';
 import Cookies from 'universal-cookie';
+import { useNavigate } from 'react-router-dom';
 
 const AddTechnologyForm = () => {
 
     const cookies = new Cookies()
+    const navigate = useNavigate()
     
     let user = cookies.get('user')
     const { jwtToken } = user 
@@ -27,6 +29,9 @@ const AddTechnologyForm = () => {
         try{
             const result = await addNewTechnology(technologyTitle, jwtToken)
             console.log(result)
+            if(result.success){
+              navigate('/view-technologies')
+            }
         }
         catch(e){
             console.log(e)

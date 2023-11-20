@@ -4,11 +4,12 @@ let data = null
 const bearer = 'Bearer'
 export const addNewTechnology = async (technologyTitle, bToken) => {
 
-    console.log(bearer, technologyTitle, bToken)
+    console.log(bearer, bToken)
 
     await axios.post(endpoints.add_technology, { technologyTitle }, {
         headers: {
-            'Authorization': `${bearer} ${bToken}`
+            'Authorization': `${bearer} ${bToken}`,
+            'Content-Type':'application/json'
         },
 
     })

@@ -7,6 +7,7 @@ import SignIn from './pages/Signin';
 import { ProtectedRoute } from './ProtectedRoute';
 import AddCourse from './pages/AddCourse';
 import AddTechnology from './pages/AddTechnology';
+import ViewTechnologies from './pages/ViewTechnologies';
 
 function App() {
   return (
@@ -29,6 +30,11 @@ function App() {
       <Route element={<DefaultLayout />}>
         <Route element={<ProtectedRoute />}>
           <Route exact path='/add-technology' element={<AddTechnology />} />
+        </Route>
+      </Route>
+      <Route element={<DefaultLayout />}>
+        <Route element={<ProtectedRoute />}>
+          <Route exact path='/view-technologies' element={<ViewTechnologies />} />
         </Route>
       </Route>
       <Route exact path='/login' element={<SignIn />} />
