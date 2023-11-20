@@ -8,7 +8,7 @@ export const getTechnologies = async (bToken) => {
 
     await axios.get(endpoints.get_technology,{
         headers:{
-            'Authorization':`${bearer} ${` `} ${bToken}`,
+            'Authorization':`${bearer} ${bToken}`,
             "Content-Type":'application/json'
         }
     })

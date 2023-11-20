@@ -30,10 +30,10 @@ const Signin = () => {
     try {
       const result = await loginUser(username, password)
       console.log(result)
-      if(result.success){
-          cookies.set('user', result)
-          console.log('Login successfully')
-          navigate('/dashboard')
+      if (result.success) {
+        cookies.set('user', result)
+        console.log('Login successfully')
+        navigate('/dashboard')
       }
     }
     catch (e) {
@@ -44,7 +44,7 @@ const Signin = () => {
 
   return (
     <>
-      <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
+      <div className="bg-white border rounded-sm border-stroke shadow-default dark:border-strokedark dark:bg-boxdark">
         <div className="flex flex-wrap items-center">
           <div className="hidden w-full xl:block xl:w-1/2">
             <div className="py-17.5 px-26 text-center">
@@ -58,7 +58,7 @@ const Signin = () => {
                 suspendisse.
               </p>
 
-              <span className="mt-15 inline-block">
+              <span className="inline-block mt-15">
                 <svg
                   width="350"
                   height="350"
@@ -186,8 +186,8 @@ const Signin = () => {
           <div className="w-full border-stroke dark:border-strokedark xl:w-1/2 xl:border-l-2">
             <div className="w-full p-4 sm:p-12.5 xl:p-17.5">
               <span className="mb-1.5 block font-medium">Start for free</span>
-              <h2 className="mb-9 text-2xl font-bold text-black dark:text-white sm:text-title-xl2">
-                Sign In to TailAdmin
+              <h2 className="text-2xl font-bold text-black mb-9 dark:text-white sm:text-title-xl2">
+                Sign In to your LMS
               </h2>
 
               <form onSubmit={handleSubmit(submitData)}>
@@ -200,9 +200,9 @@ const Signin = () => {
                       type="email"
                       placeholder="Enter your email"
                       name="username"
-                      className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-                      {...register('username',{ required: true })}
-                      onChangeCapture={(e)=> setFormData({...formData, username: e.target.value })}
+                      className="w-full py-4 pl-6 pr-10 bg-transparent border rounded-lg outline-none border-stroke focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                      {...register('username', { required: true })}
+                      onChangeCapture={(e) => setFormData({ ...formData, username: e.target.value })}
                     />
                     {errors.username && <small className="text-danger">username is required!</small>}
                     <span className="absolute right-4 top-4">
@@ -234,11 +234,11 @@ const Signin = () => {
                       type="password"
                       name="password"
                       placeholder="6+ Characters, 1 Capital letter"
-                      className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-                      {...register('password',{required: true})}
-                      onChangeCapture={(e)=> setFormData({...formData, password: e.target.value })}
+                      className="w-full py-4 pl-6 pr-10 bg-transparent border rounded-lg outline-none border-stroke focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                      {...register('password', { required: true })}
+                      onChangeCapture={(e) => setFormData({ ...formData, password: e.target.value })}
                     />
-                     {errors.password && <small class="text-danger">password is required!</small>}
+                    {errors.password && <small class="text-danger">password is required!</small>}
                     <span className="absolute right-4 top-4">
                       <svg
                         className="fill-current"
@@ -265,12 +265,12 @@ const Signin = () => {
 
                 <div className="mb-5">
                   <button type="submit"
-                    className="w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-white transition hover:bg-opacity-90"
+                    className="w-full p-4 text-white transition border rounded-lg cursor-pointer border-primary bg-primary hover:bg-opacity-90"
                   >
                     Submit</button>
                 </div>
 
-            
+
 
                 <div className="mt-6 text-center">
                   <p>
