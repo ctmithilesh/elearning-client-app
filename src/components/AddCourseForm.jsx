@@ -3,6 +3,7 @@ import Breadcrumb from './BreadCrumb'
 import { useEffect, useState } from 'react';
 import { getTechnologies } from '../lib/getTechnologies';
 import Cookies from 'universal-cookie';
+import { addNewCourse } from '../lib/addNewCourse';
 
 const AddCourseForm = () => {
 
@@ -44,6 +45,26 @@ const AddCourseForm = () => {
 
 
   const submiData = async () => {
+
+      console.log(formData)
+      const {
+        courseName, 
+        courseDescription,
+        courseImage,
+        startDate,
+        endDate,
+        facultyId,
+        technologyId,
+      } = formData 
+
+
+      try{
+          const result = await addNewCourse()
+          console.log(result)
+      }
+      catch(e){
+        console.log(e)
+      }
 
 
   }
@@ -101,7 +122,7 @@ const AddCourseForm = () => {
                     type="text"
                     placeholder="Course Image URL"
                     className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-                    {...register('courseName',{ required: true})}
+                    {...register('courseImage',{ required: true})}
                       onChangeCapture={(e)=> setData({...formData, courseImage: e.target.value})}
                   />
                   {errors.courseImage && <small class="text-danger">Course Image is required!</small>}
@@ -164,6 +185,8 @@ const AddCourseForm = () => {
                     rows={6}
                     placeholder="Type your message"
                     className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                    {...register('facultyId',{ required: true })}
+                    onChangeCapture={(e)=> setData({...formData, technologyId: e.target.value})}
                   > 
                   <option value={email} disabled class="text-graydark">{email}</option>
 
@@ -175,14 +198,18 @@ const AddCourseForm = () => {
                   </label>
                   <select
                     rows={6}
+                    name="technologyId"
                     placeholder="Type your message"
                     className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
+                    {...register('technologyId',{ required: true })}
+                    onChangeCapture={(e)=> setData({...formData, technologyId: e.target.value})}
                   >
                   {technologies != null && technologies.length ? technologies.map((item, index )=>(
-                       <option value={item.technologyTitle}>{item.technologyTitle} </option>
+                       <option value={item.technologyId}>{item.technologyTitle} </option>
                   )): <span> loading.... </span>}
                  </select>
                 </div>
+                {errors.technologyId && <small class="text-danger">Technology is required!</small>}
 
                 <button type="submit" className="flex w-full justify-center rounded bg-primary p-3 font-medium text-gray">
                  Submit 
