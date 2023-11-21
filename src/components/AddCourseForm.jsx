@@ -5,12 +5,14 @@ import { getTechnologies } from '../lib/getTechnologies';
 import Cookies from 'universal-cookie';
 import { addNewCourse } from '../lib/addNewCourse';
 import { getUserProfile } from '../lib/getProfileDetails';
+import { useNavigate } from 'react-router-dom';
 
 const AddCourseForm = () => {
 
   const [courses, setCourses] = useState(null)
   const [userProfile, setProfile] = useState(null)
   const [technologies, setTechnologies] = useState(null)
+  const navigate = useNavigate()
 
   // user_id 
   const facultyId = 17
@@ -80,6 +82,9 @@ const AddCourseForm = () => {
       try{
           const result = await addNewCourse(courseName, courseDescription, courseImage, startDate, endDate, facultyId, technologyId, jwtToken)
           console.log(result)
+          if(result.success){
+              navigate('/view-courses')
+          }
       }
       catch(e){
         console.log(e)
