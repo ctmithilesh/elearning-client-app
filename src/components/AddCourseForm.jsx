@@ -4,11 +4,16 @@ import { useEffect, useState } from 'react';
 import { getTechnologies } from '../lib/getTechnologies';
 import Cookies from 'universal-cookie';
 import { addNewCourse } from '../lib/addNewCourse';
+import { getUserProfile } from '../lib/getProfileDetails';
 
 const AddCourseForm = () => {
 
   const [courses, setCourses] = useState(null)
+  const [userProfile, setProfile] = useState(null)
   const [technologies, setTechnologies] = useState(null)
+
+  // user_id 
+  const facultyId = 17
 
   const [formData, setData] = useState({})
   const {
@@ -20,15 +25,19 @@ const AddCourseForm = () => {
 
   const cookies = new Cookies()
   let user = cookies.get('user')
-  console.log('user', user)
+  //console.log('user', user)
   const { jwtToken, email } = user 
-  console.log(jwtToken)
+  //console.log(jwtToken)
 
   useEffect(()=>{
         
       if(!technologies){
         fetchTechnologiesData()
       }
+
+  
+        //fetchUserProfileData()
+      
           
 
 
@@ -43,6 +52,17 @@ const AddCourseForm = () => {
 
   }
 
+  // const fetchUserProfileData = async () => {
+
+  //   const result = await getUserProfile(jwtToken, email)
+  //   console.log('result', result)
+  //   //const { data } = result 
+  //  // setProfile(data)
+
+  //   //console.log(data)
+
+  // }
+
 
   const submiData = async () => {
 
@@ -53,13 +73,12 @@ const AddCourseForm = () => {
         courseImage,
         startDate,
         endDate,
-        facultyId,
         technologyId,
       } = formData 
 
 
       try{
-          const result = await addNewCourse()
+          const result = await addNewCourse(courseName, courseDescription, courseImage, startDate, endDate, facultyId, technologyId, jwtToken)
           console.log(result)
       }
       catch(e){
@@ -185,7 +204,7 @@ const AddCourseForm = () => {
                     rows={6}
                     placeholder="Type your message"
                     className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-                    {...register('facultyId',{ required: true })}
+                    {...register('facultyId',{ required: false })}
                     onChangeCapture={(e)=> setData({...formData, technologyId: e.target.value})}
                   > 
                   <option value={email} disabled class="text-graydark">{email}</option>

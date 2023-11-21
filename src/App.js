@@ -8,6 +8,7 @@ import { ProtectedRoute } from './ProtectedRoute';
 import AddCourse from './pages/AddCourse';
 import AddTechnology from './pages/AddTechnology';
 import ViewTechnologies from './pages/ViewTechnologies';
+import ViewCourses from './pages/ViewCourses';
 
 function App() {
   return (
@@ -35,6 +36,11 @@ function App() {
       <Route element={<DefaultLayout />}>
         <Route element={<ProtectedRoute />}>
           <Route exact path='/view-technologies' element={<ViewTechnologies />} />
+        </Route>
+      </Route>
+      <Route element={<DefaultLayout />}>
+        <Route element={<ProtectedRoute />}>
+          <Route exact path='/view-courses' element={<ViewCourses />} />
         </Route>
       </Route>
       <Route exact path='/login' element={<SignIn />} />

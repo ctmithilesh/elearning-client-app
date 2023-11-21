@@ -2,11 +2,11 @@ import axios from "axios"
 import { endpoints } from "../data/endpoints"
 let data = null 
 const bearer = 'Bearer'
-export const getTechnologies = async (bToken) => {
+export const getUserProfile = async (bToken, email ) => {
 
-   // console.log(bearer, bToken)
+   console.log(bToken, email)
 
-    await axios.get(endpoints.get_technology,{
+    await axios.get(endpoints.get_user_profile,{ email }, {
         headers:{
             'Authorization':`${bearer} ${bToken}`,
             "Content-Type":'application/json'
