@@ -7,6 +7,7 @@ import { addNewCourse } from '../lib/addNewCourse';
 import { getUserProfile } from '../lib/getProfileDetails';
 import { useNavigate } from 'react-router-dom';
 import { getCourses } from '../lib/getCourses';
+import { addLesson } from '../lib/addLesson';
 
 const AddLessonForm = () => {
 
@@ -70,17 +71,13 @@ const AddLessonForm = () => {
 
       console.log(formData)
       const {
-        courseName, 
-        courseDescription,
-        courseImage,
-        startDate,
-        endDate,
-        technologyId,
+        lessonTitle,
+        lessonOrder
       } = formData 
 
 
       try{
-          const result = await addNewCourse(courseName, courseDescription, courseImage, startDate, endDate, facultyId, technologyId, jwtToken)
+          const result = await addLesson(lessonTitle, lessonOrder, jwtToken)
           console.log(result)
           if(result.success){
               navigate('/view-courses')
@@ -118,9 +115,9 @@ const AddLessonForm = () => {
                       placeholder="Enter Course Name"
                       className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                       {...register('lessonTitle',{ required: true})}
-                      onChangeCapture={(e)=> setData({...formData, courseName: e.target.value})}
+                      onChangeCapture={(e)=> setData({...formData, lessonTitle: e.target.value})}
                     />
-                    {errors.courseName && <small class="text-danger">Course Name is required!</small>}
+                    {errors.lessonTitle && <small class="text-danger">Lesson Title is required!</small>}
                   </div>
 
                   <div className="w-full xl:w-1/2">
@@ -134,7 +131,7 @@ const AddLessonForm = () => {
                       {...register('lessonOrder',{ required: true})}
                       onChangeCapture={(e)=> setData({...formData, lessonOrder: e.target.value})}
                     />
-                    {errors.courseDescription && <small class="text-danger">Course Description is required!</small>}
+                    {errors.lessonOrder && <small class="text-danger">Lesson Order is required!</small>}
                   </div>
                 </div>
                 <div className="mb-6">
@@ -148,10 +145,10 @@ const AddLessonForm = () => {
                     placeholder="Type your message"
                     className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                     {...register('technologyId',{ required: true })}
-                    onChangeCapture={(e)=> setData({...formData, technologyId: e.target.value})}
+                    onChangeCapture={(e)=> setData({...formData, courseId: e.target.value})}
                   >
                   {courses != null && courses.length ? courses.map((item, index )=>(
-                       <option value={item.courseId}>{item.courseName} </option>
+                       <option value={item.id}>{item.courseName} </option>
                   )): <span> loading.... </span>}
                  </select>
                 </div>

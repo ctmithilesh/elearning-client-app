@@ -10,6 +10,7 @@ import AddTechnology from './pages/AddTechnology';
 import ViewTechnologies from './pages/ViewTechnologies';
 import ViewCourses from './pages/ViewCourses';
 import AddLesson from './pages/AddLesson';
+import ViewLesson from './pages/ViewLesson';
 
 function App() {
   return (
@@ -47,6 +48,11 @@ function App() {
       <Route element={<DefaultLayout />}>
         <Route element={<ProtectedRoute />}>
           <Route exact path='/add-lesson' element={<AddLesson />} />
+        </Route>
+      </Route>
+      <Route element={<DefaultLayout />}>
+        <Route element={<ProtectedRoute />}>
+          <Route exact path='/view-lessons' element={<ViewLesson />} />
         </Route>
       </Route>
       <Route exact path='/login' element={<SignIn />} />
