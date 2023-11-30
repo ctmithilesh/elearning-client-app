@@ -11,14 +11,15 @@ import ViewTechnologies from './pages/ViewTechnologies';
 import ViewCourses from './pages/ViewCourses';
 import AddLesson from './pages/AddLesson';
 import ViewLesson from './pages/ViewLesson';
+import AddContent from './pages/AddContent';
 
 function App() {
   return (
     <Routes>
       <Route element={<DefaultLayout />}>
-          <Route element={<ProtectedRoute />}>
-              <Route exact path='/' element={<Profile />} />
-          </Route>
+        <Route element={<ProtectedRoute />}>
+          <Route exact path='/' element={<Profile />} />
+        </Route>
       </Route>
       <Route element={<DefaultLayout />}>
         <Route element={<ProtectedRoute />}>
@@ -52,7 +53,12 @@ function App() {
       </Route>
       <Route element={<DefaultLayout />}>
         <Route element={<ProtectedRoute />}>
-          <Route exact path='/view-lessons' element={<ViewLesson />} />
+          <Route exact path='/view-lessons/:id' element={<ViewLesson />} />
+        </Route>
+      </Route>
+      <Route element={<DefaultLayout />}>
+        <Route element={<ProtectedRoute />}>
+          <Route exact path='/add-content' element={<AddContent />} />
         </Route>
       </Route>
       <Route exact path='/login' element={<SignIn />} />

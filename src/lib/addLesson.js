@@ -2,14 +2,16 @@ import axios from "axios"
 import { endpoints } from "../data/endpoints"
 let data = null
 const bearer = 'Bearer'
-export const addLesson = async (lessonTitle, lessonOrder, bToken) => {
+let url = 'https://elearningbck-891190cb2aaa.herokuapp.com/api/v1/courses'
+export const addLesson = async (lessonTitle, lessonOrder, courseId, bToken) => {
 
     console.log(bearer, bToken)
 
-    await axios.post(endpoints.add_new_lesson, {lessonTitle, lessonOrder  }, {
+
+    await axios.post(url + `/${courseId}/lessons`, { lessonTitle, lessonOrder }, {
         headers: {
             'Authorization': `${bearer} ${bToken}`,
-            'Content-Type':'application/json'
+            'Content-Type': 'application/json'
         },
 
     })

@@ -15,7 +15,7 @@ const AddCourseForm = () => {
   const navigate = useNavigate()
 
   // user_id 
-  const facultyId = 17
+  const facultyId = 2
 
   const [formData, setData] = useState({})
   const {
@@ -28,28 +28,28 @@ const AddCourseForm = () => {
   const cookies = new Cookies()
   let user = cookies.get('user')
   //console.log('user', user)
-  const { jwtToken, email } = user 
+  const { jwtToken, email } = user
   //console.log(jwtToken)
 
-  useEffect(()=>{
-        
-      if(!technologies){
-        fetchTechnologiesData()
-      }
+  useEffect(() => {
 
-  
-        //fetchUserProfileData()
-      
-          
+    if (!technologies) {
+      fetchTechnologiesData()
+    }
+
+
+    //fetchUserProfileData()
+
+
 
 
   })
 
   const fetchTechnologiesData = async () => {
 
-    
+
     const result = await getTechnologies(jwtToken)
-    const { data } = result 
+    const { data } = result
     setTechnologies(data)
 
   }
@@ -68,27 +68,27 @@ const AddCourseForm = () => {
 
   const submiData = async () => {
 
-      console.log(formData)
-      const {
-        courseName, 
-        courseDescription,
-        courseImage,
-        startDate,
-        endDate,
-        technologyId,
-      } = formData 
+    console.log(formData)
+    const {
+      courseName,
+      courseDescription,
+      courseImage,
+      startDate,
+      endDate,
+      technologyId,
+    } = formData
 
 
-      try{
-          const result = await addNewCourse(courseName, courseDescription, courseImage, startDate, endDate, facultyId, technologyId, jwtToken)
-          console.log(result)
-          if(result.success){
-              navigate('/view-courses')
-          }
+    try {
+      const result = await addNewCourse(courseName, courseDescription, courseImage, startDate, endDate, facultyId, technologyId, jwtToken)
+      console.log(result)
+      if (result.success) {
+        navigate('/view-courses')
       }
-      catch(e){
-        console.log(e)
-      }
+    }
+    catch (e) {
+      console.log(e)
+    }
 
 
   }
@@ -100,7 +100,7 @@ const AddCourseForm = () => {
       <div className="grid grid-cols-1 gap-9 sm:grid-cols-1">
         <div className="flex flex-col gap-9">
           {/* <!-- Contact Form --> */}
-          <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
+          <div className="bg-white border rounded-sm border-stroke shadow-default dark:border-strokedark dark:bg-boxdark">
             <div className="border-b border-stroke py-4 px-6.5 dark:border-strokedark">
               <h3 className="font-medium text-black dark:text-white">
                 Add Course
@@ -117,8 +117,8 @@ const AddCourseForm = () => {
                       type="text"
                       placeholder="Enter Course Name"
                       className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-                      {...register('courseName',{ required: true})}
-                      onChangeCapture={(e)=> setData({...formData, courseName: e.target.value})}
+                      {...register('courseName', { required: true })}
+                      onChangeCapture={(e) => setData({ ...formData, courseName: e.target.value })}
                     />
                     {errors.courseName && <small class="text-danger">Course Name is required!</small>}
                   </div>
@@ -131,8 +131,8 @@ const AddCourseForm = () => {
                       type="text"
                       placeholder="Enter your last name"
                       className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-                      {...register('courseDescription',{ required: true})}
-                      onChangeCapture={(e)=> setData({...formData, courseDescription: e.target.value})}
+                      {...register('courseDescription', { required: true })}
+                      onChangeCapture={(e) => setData({ ...formData, courseDescription: e.target.value })}
                     />
                     {errors.courseDescription && <small class="text-danger">Course Description is required!</small>}
                   </div>
@@ -146,8 +146,8 @@ const AddCourseForm = () => {
                     type="text"
                     placeholder="Course Image URL"
                     className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-                    {...register('courseImage',{ required: true})}
-                      onChangeCapture={(e)=> setData({...formData, courseImage: e.target.value})}
+                    {...register('courseImage', { required: true })}
+                    onChangeCapture={(e) => setData({ ...formData, courseImage: e.target.value })}
                   />
                   {errors.courseImage && <small class="text-danger">Course Image is required!</small>}
                 </div>
@@ -160,8 +160,8 @@ const AddCourseForm = () => {
                     type="date"
                     placeholder="Select subject"
                     className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-                    {...register('startDate',{ required: true})}
-                      onChangeCapture={(e)=> setData({...formData, startDate: e.target.value})}
+                    {...register('startDate', { required: true })}
+                    onChangeCapture={(e) => setData({ ...formData, startDate: e.target.value })}
                   />
                   {errors.startDate && <small class="text-danger">Start Date is required!</small>}
                 </div>
@@ -173,8 +173,8 @@ const AddCourseForm = () => {
                     type="date"
                     placeholder="Select subject"
                     className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-                    {...register('endDate',{ required: true})}
-                      onChangeCapture={(e)=> setData({...formData, endDate: e.target.value})}
+                    {...register('endDate', { required: true })}
+                    onChangeCapture={(e) => setData({ ...formData, endDate: e.target.value })}
                   />
                   {errors.endDate && <small class="text-danger">End Date is required!</small>}
                 </div>
@@ -189,10 +189,10 @@ const AddCourseForm = () => {
                     rows={6}
                     placeholder="Type your message"
                     className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-                    {...register('facultyId',{ required: false })}
-                    onChangeCapture={(e)=> setData({...formData, technologyId: e.target.value})}
-                  > 
-                  <option value={email} disabled class="text-graydark">{email}</option>
+                    {...register('facultyId', { required: false })}
+                    onChangeCapture={(e) => setData({ ...formData, technologyId: e.target.value })}
+                  >
+                    <option value={email} disabled class="text-graydark">{email}</option>
 
                   </select >
                 </div>
@@ -205,18 +205,18 @@ const AddCourseForm = () => {
                     name="technologyId"
                     placeholder="Type your message"
                     className="w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-medium outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-                    {...register('technologyId',{ required: true })}
-                    onChangeCapture={(e)=> setData({...formData, technologyId: e.target.value})}
+                    {...register('technologyId', { required: true })}
+                    onChangeCapture={(e) => setData({ ...formData, technologyId: e.target.value })}
                   >
-                  {technologies != null && technologies.length ? technologies.map((item, index )=>(
-                       <option value={item.technologyId}>{item.technologyTitle} </option>
-                  )): <span> loading.... </span>}
-                 </select>
+                    {technologies != null && technologies.length ? technologies.map((item, index) => (
+                      <option value={item.technologyId}>{item.technologyTitle} </option>
+                    )) : <span> loading.... </span>}
+                  </select>
                 </div>
                 {errors.technologyId && <small class="text-danger">Technology is required!</small>}
 
-                <button type="submit" className="flex w-full justify-center rounded bg-primary p-3 font-medium text-gray">
-                 Submit 
+                <button type="submit" className="flex justify-center w-full p-3 font-medium rounded bg-primary text-gray">
+                  Submit
                 </button>
               </div>
             </form>
