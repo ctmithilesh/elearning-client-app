@@ -12,6 +12,7 @@ import ViewCourses from './pages/ViewCourses';
 import AddLesson from './pages/AddLesson';
 import ViewLesson from './pages/ViewLesson';
 import AddContent from './pages/AddContent';
+import LessonContent from './pages/LessonContent';
 
 function App() {
   return (
@@ -59,6 +60,11 @@ function App() {
       <Route element={<DefaultLayout />}>
         <Route element={<ProtectedRoute />}>
           <Route exact path='/add-content' element={<AddContent />} />
+        </Route>
+      </Route>
+      <Route element={<DefaultLayout />}>
+        <Route element={<ProtectedRoute />}>
+          <Route exact path='/:courseId/:lessonTitle/:lessonId/lesson-content' element={<LessonContent />} />
         </Route>
       </Route>
       <Route exact path='/login' element={<SignIn />} />

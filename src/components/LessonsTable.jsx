@@ -3,6 +3,7 @@ import { getLesson } from '../lib/getLesson';
 import Cookies from 'universal-cookie';
 import { getCourses } from '../lib/getCourses';
 import { MediaPlayer, MediaProvider } from '@vidstack/react';
+import { Link } from 'react-router-dom';
 
 
 const LessonsTable = (props) => {
@@ -40,19 +41,43 @@ const LessonsTable = (props) => {
         <div key={index} className="col-span-12 rounded-sm border border-stroke bg-white px-5 pt-7.5 pb-5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5">
           <div>
             <h3 className="text-xl font-semibold text-black dark:text-white">
-              {item.lessonTitle}
+              <Link to={`/${item.courseId}/${item.lessonTitle}/${item.lessonId}/lesson-content`}>
+                  Lesson Title: {item.lessonTitle}  
+              </Link>
             </h3>
-            {item.courseContents?.map((item, index) => (
-              <div className="mb-2" key={index}>
-                <MediaPlayer title="Sprite Fight" src="youtube/_cMxraX_5RE">
-                  <MediaProvider />
-                </MediaPlayer>
+            {item.courseContents != null && item.courseContents.length > 0 ? item.courseContents.map((item)=>(
+
+                <div>
+                <h3>Content Title: {item.contentTitle}</h3>
+                <h3>Content ID: {item.contentId}</h3>
+                <p>Content Order: {item.contentOrder}</p>
+
+                <div className="mb-2" key={index}>
+
+                <MediaPlayer title="Sprite Fight" src={item.contentUrl}>
+                <MediaProvider />
+                </MediaPlayer>  
+
+
+
                 <a href={item.contentUrl} alt="img" target="_blank" rel="noreferrer"> click here </a>
                 <div id="chartFour" className="-ml-5">
-                  {item.contentDescription}
+                {item.contentDescription}
                 </div>
-              </div>
-            ))}
+                </div>
+                </div>
+
+
+
+
+            )): null}
+            
+           
+          
+          
+    
+              
+           
           </div>
         </div>
 
