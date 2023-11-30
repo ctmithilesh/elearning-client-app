@@ -4,6 +4,7 @@ import Cookies from 'universal-cookie';
 import { getCourses } from '../lib/getCourses';
 import { MediaPlayer, MediaProvider } from '@vidstack/react';
 import { Link } from 'react-router-dom';
+import ReactPlayer from 'react-player'
 
 
 const LessonsTable = (props) => {
@@ -54,9 +55,28 @@ const LessonsTable = (props) => {
 
                 <div className="mb-2" key={index}>
 
-                <MediaPlayer title="Sprite Fight" src={item.contentUrl}>
+                <ReactPlayer 
+                    url={item.contentUrl} 
+                    controls={true}
+                    config={{
+                      youtube:{
+                        playerVars:{
+                          showInfo:1
+                        }
+                      }
+                    }}
+                    
+                  />
+
+                {/* <MediaPlayer 
+                    className="w-full aspect-video bg-slate-900 text-white font-sans overflow-hidden rounded-md ring-media-focus data-[focus]:ring-4"
+                    title="Sprite Fight" 
+                    src={item.contentUrl}
+                    playsinline={true}
+                    
+                  >
                 <MediaProvider />
-                </MediaPlayer>  
+                </MediaPlayer>   */}
 
 
 
